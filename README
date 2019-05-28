@@ -1,0 +1,13 @@
+serminal
+
+> simple arm64 serial terminal for iOS devices (armv7(s) supported for serialsh).
+
+I. Requierements
+	1. DCSD cable
+	2. iOS device
+	3. GNU/Linux - macOS
+
+II. Note
+	> if you can't run it on GNU/Linux, use the provided binary in the Releases.
+
+updated: 15.04.2019
