@@ -1,20 +1,23 @@
 //
-//  serminal.mm
+//  serminal.c
 //  serminal
 //
 //  Created by Yui on 14/04/19.
 //  Copyright © 2019 yumiistar. All rights reserved.
 //  
 
-#include <string>
+#include <stdio.h>
+#include <stdlib.h
+#include <string.h>
 #include <fcntl.h>
+#include <sys/file.h>
 #include <unistd.h>
 #include <termios.h>
 
 struct termios tty;
 int attribs(int fd) {
 	memset(&tty, 0x0, sizeof(tty));
-	uint64_t ret = tcgetattr(fd, &tty);
+	u_int64_t ret = tcgetattr(fd, &tty);
 	if (ret != 0x0) { return -0x1; }
 	cfsetispeed(&tty, B115200); // yes the baudrate is high
 	cfsetospeed(&tty, B115200); // but don't change it anyways
@@ -32,12 +35,12 @@ int attribs(int fd) {
 }
 
 int main(int argc, char *argv[]) {
-	uint8_t buf[1024];
+	u_int8_t buf[1024];
 	if (argc != 0x2) { printf("usage: %s /dev/tty.usbserial-xxx\n", argv[0]); exit(-1); }
 	// from there starts the fun
 	const char *serialport = argv[1];
 	printf("[INFO]: opening %s..\n", serialport);
-	uint64_t fd = open(serialport, O_RDWR | O_NONBLOCK);
+	u_int64_t fd = open(serialport, O_RDWR | O_NONBLOCK);
 	if (fd < 0x0) { printf("usage: %s /dev/tty.usbserial-xxx\n", argv[0]); exit(-1); }
 	printf("OK: opened %s\n", serialport);
 	printf("[INFO]: configuring %s..\n", serialport);
@@ -51,7 +54,7 @@ int main(int argc, char *argv[]) {
 	printf("OK: configured %s\n", serialport);
 	printf("[connected, use CTRL+C to disconnect]\r\n");
 	while (1) {
-		uint64_t rd = read(fd, buf, 1024);
+		u_int64_t rd = read(fd, buf, 1024);
 		if (rd < 0x0 && rd == 0x0) { return -0x1; }
 		write(0x1, buf, rd); // don't set fd instead of STDOUT_FILENO
 		// not read(0x1, buf, 1024); then write(fd, buf, rd);
