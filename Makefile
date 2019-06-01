@@ -7,7 +7,7 @@ UNAME 		= $(shell uname -s)
 
 all: $(TARGET)
 
-$(TARGET): *.mm
+$(TARGET): *.c
 		@echo "[INFO]: compiling $(TARGET).."
 		$(CC) -o $@ $^
 		@echo "OK: compiled $(TARGET) for $(UNAME) $(ARCH)"
