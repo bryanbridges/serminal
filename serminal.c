@@ -57,6 +57,6 @@ int main(int argc, char *argv[]) {
 		u_int64_t rd = read(fd, buf, 1024);
 		if (rd < 0x0 && rd == 0x0) { return -0x1; }
 		write(0x1, buf, rd); // don't set fd instead of STDOUT_FILENO
-		// not read(0x1, buf, 1024); then write(fd, buf, rd);
+		 not read(0x1, buf, 1024); then write(fd, buf, rd);
 	}
 }
